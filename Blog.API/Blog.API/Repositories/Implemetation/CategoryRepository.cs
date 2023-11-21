@@ -15,6 +15,7 @@ namespace Blog.API.Repositories.Implemetation
             this.dbContext = dbContext;
         }
 
+        //Creating Category
         public async Task<Category> CreateAsync(Category category)
         {
             await dbContext.Categories.AddAsync(category);
@@ -24,6 +25,8 @@ namespace Blog.API.Repositories.Implemetation
 
         }
 
+
+        //Get All the categories
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
           return  await dbContext.Categories.ToListAsync();

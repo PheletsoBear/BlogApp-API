@@ -21,6 +21,7 @@ namespace Blog.API.Controllers
     {
         private readonly ICategoryRepository categoryRepository;
 
+        //Injecting ICategory Repository inside the Controller
         public CategoriesController(ICategoryRepository categoryRepository) {
             this.categoryRepository = categoryRepository;
         }
@@ -38,13 +39,11 @@ namespace Blog.API.Controllers
             {
                 Name = request.Name,
                 UrlHandle = request.UrlHandle
-
-
-
             };
 
 
             await categoryRepository.CreateAsync(category);
+
             // Domain model to DTO
             var response = new CategoryDto
             {
@@ -58,13 +57,13 @@ namespace Blog.API.Controllers
 
         }
 
-        //api/categories
+        // Get:https://localhost:7223/api/Categories
         [HttpGet]
 
         public async Task<IActionResult> GetAllCategories()
         {
             var categories = await categoryRepository.GetAllAsync();
-            await categoryRepository.GetAllAsync();
+         
 
             //Map Domain Model to DTO
 
