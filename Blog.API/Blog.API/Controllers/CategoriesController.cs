@@ -21,14 +21,14 @@ namespace Blog.API.Controllers
     {
         private readonly ICategoryRepository categoryRepository;
 
-        //Injecting ICategory Repository inside the Controller
+        //Injecting ICategoryRepository inside the Controller
         public CategoriesController(ICategoryRepository categoryRepository) {
             this.categoryRepository = categoryRepository;
         }
        
 
 
-
+        //Creating Category
 
         [HttpPost] //This decorates controller action methods and is asociated with the HHTPS post method
         public async Task<IActionResult> CreateCategory(CreateCategoryRequestDto request)
@@ -56,6 +56,9 @@ namespace Blog.API.Controllers
 
 
         }
+
+
+        //Getting all the Categories
 
         // Get:https://localhost:7223/api/Categories
         [HttpGet]
