@@ -25,7 +25,7 @@ namespace Blog.API.Controllers
         public CategoriesController(ICategoryRepository categoryRepository) {
             this.categoryRepository = categoryRepository;
         }
-       
+
 
 
         //Creating Category
@@ -66,12 +66,12 @@ namespace Blog.API.Controllers
         public async Task<IActionResult> GetAllCategories()
         {
             var categories = await categoryRepository.GetAllAsync();
-         
+
 
             //Map Domain Model to DTO
 
             var response = new List<CategoryDto>();
-            foreach(var category in categories)
+            foreach (var category in categories)
             {
                 response.Add(new CategoryDto
                 {
@@ -81,8 +81,29 @@ namespace Blog.API.Controllers
 
                 });
             }
-           return Ok(response);
+            return Ok(response);
         }
+
+        // Get:https://localhost:7223/api/Categories/id
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetCategoById([FromRoute] Guid id)
+        {
+            var existingCategory = await categoryRepository.GetById(id);
+
+            if (existingCategory is null)
+            {
+                return NotFound();
+            }
+            var response = new CategoryDto
+            {
+                Id = existingCategory.Id,
+                Name = existingCategory.Name,
+                UrlHandle = existingCategory.UrlHandle
+            };
+            return Ok(response);
+        }
+
     }
 
 

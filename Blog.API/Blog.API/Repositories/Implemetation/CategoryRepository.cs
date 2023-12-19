@@ -1,6 +1,7 @@
 ﻿using Blog.API.Data;
 using Blog.API.Models.Domain;
 using Blog.API.Repositories.Interface;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.API.Repositories.Implemetation
@@ -30,6 +31,11 @@ namespace Blog.API.Repositories.Implemetation
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
           return  await dbContext.Categories.ToListAsync();
+        }
+
+        public async Task<Category?> GetById([FromRoute] Guid id)
+        {
+            return await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }
