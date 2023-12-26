@@ -84,6 +84,8 @@ namespace Blog.API.Controllers
             return Ok(response);
         }
 
+        //this is method for getting the categories by id for eiting
+
         // Get:https://localhost:7223/api/Categories/id
         [HttpGet]
         [Route("{id:Guid}")]
@@ -104,6 +106,7 @@ namespace Blog.API.Controllers
             return Ok(response);
         }
 
+        //This is the method for updating the categories
 
         //PUT: https://localhost:7223/api/categories/{id}
         [HttpPut]
