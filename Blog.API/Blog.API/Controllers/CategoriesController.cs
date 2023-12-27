@@ -33,19 +33,19 @@ namespace Blog.API.Controllers
         [HttpPost] //This decorates controller action methods and is asociated with the HHTPS post method
         public async Task<IActionResult> CreateCategory(CreateCategoryRequestDto request)
         {
-            //Map DTO to Domain Model by which we link request DTO to the  Domain model
+            //Mapping DTO to Domain Model by which we link request DTO to the  Domain model
 
-            var category = new Category
+            var category = new Category  // creating new category as an instance of the Category class in the Domain-model
             {
                 Name = request.Name,
                 UrlHandle = request.UrlHandle
             };
 
 
-            await categoryRepository.CreateAsync(category);
+            await categoryRepository.CreateAsync(category);  // this ensures that the that the code does not run to the next line until Asynchronous method CreatAsync is finished
 
-            // Domain model to DTO
-            var response = new CategoryDto
+            // Mapping Domain model to DTO by which we link the newly created category to the DTO
+            var response = new CategoryDto // creating response as in instance of the DTO 
             {
                 Id = category.Id,
                 Name = category.Name,
@@ -56,6 +56,7 @@ namespace Blog.API.Controllers
 
 
         }
+
 
 
         //Getting all the Categories
