@@ -8,9 +8,11 @@ namespace Blog.API.Repositories.Implemetation
 {
     public class CategoryRepository : ICategoryRepository  //Inheriting the Interface repository in the implementation
     {
-        private readonly ApplicationDbContext dbContext; 
-
         //Injecting DbContext into the Repository
+       
+        
+        private readonly ApplicationDbContext dbContext;   //Read-only property to inject the DbContext class
+
         public CategoryRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
