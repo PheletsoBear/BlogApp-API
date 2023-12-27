@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BlogConnectionString")); //Injecting the connection connection string
 });
 
-builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();  // Injecting Repositories (Interface and implementation)
 
 
 var app = builder.Build();
@@ -46,4 +46,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-5
