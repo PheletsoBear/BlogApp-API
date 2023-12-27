@@ -69,7 +69,7 @@ namespace Blog.API.Controllers
             var categories = await categoryRepository.GetAllAsync();
 
 
-            //Map Domain Model to DTO
+            //Map Domain Model to DTO  in order to be able to list the categories
 
             var response = new List<CategoryDto>();
             foreach (var category in categories)
@@ -82,7 +82,7 @@ namespace Blog.API.Controllers
 
                 });
             }
-            return Ok(response);
+            return Ok(response); // This is the OK 200 success response that gets populated on the Swagger Documentation
         }
 
         //this is method for getting the categories by id for eiting
