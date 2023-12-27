@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blog.API.Repositories.Implemetation
 {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : ICategoryRepository  //Inheriting the Interface repository in the implementation
     {
         private readonly ApplicationDbContext dbContext; 
 
