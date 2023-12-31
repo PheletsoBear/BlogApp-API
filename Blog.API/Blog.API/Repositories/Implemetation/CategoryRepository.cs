@@ -28,6 +28,22 @@ namespace Blog.API.Repositories.Implemetation
 
         }
 
+        public async Task<Category?> DeleteAsync(Guid id)
+        {
+            var existingCategory = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            
+            if (existingCategory is null)
+            {
+                return null;
+            }
+           
+                dbContext.Categories.Remove(existingCategory);
+                await dbContext.SaveChangesAsync();
+                return existingCategory;
+           
+        
+        }
+
 
         //Get All the categories
         public async Task<IEnumerable<Category>> GetAllAsync()
@@ -37,7 +53,7 @@ namespace Blog.API.Repositories.Implemetation
 
         public async Task<Category?> GetById([FromRoute] Guid id)
         {
-            return await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            return await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id); // This returns the Id Based on the Lambda expression
         }
 
         public async Task<Category?> UpdateAsync(Category category)
@@ -50,7 +66,11 @@ namespace Blog.API.Repositories.Implemetation
                 await dbContext.SaveChangesAsync(true);
                 return category;
             }
-            return null;
+            else
+            {
+               return null;
+
+            }
         }
     }
 }

@@ -85,19 +85,21 @@ namespace Blog.API.Controllers
             return Ok(response); // This is the OK 200 success response that gets populated on the Swagger Documentation
         }
 
-        //this is method for getting the categories by id for eiting
+        //this is method for getting the category by id for eiting
 
         // Get:https://localhost:7223/api/Categories/id
         [HttpGet]
         [Route("{id:Guid}")]
         public async Task<IActionResult> GetCategoById([FromRoute] Guid id)
         {
-            var existingCategory = await categoryRepository.GetById(id);
+            var existingCategory = await categoryRepository.GetById(id); //The extistingCategory variable will hold the value returned by the GetById method
 
             if (existingCategory is null)
             {
-                return NotFound();
+                return NotFound(); //this generates error status 404 not found result
             }
+
+
             var response = new CategoryDto
             {
                 Id = existingCategory.Id,
@@ -112,9 +114,9 @@ namespace Blog.API.Controllers
         //PUT: https://localhost:7223/api/categories/{id}
         [HttpPut]
         [Route("{id:Guid}")]
-        public async Task<IActionResult> EditCategory([FromRoute] Guid id, UpdateCategoryDto request )
+        public async Task<IActionResult> EditCategory([FromRoute] Guid id, UpdateCategoryDto request)
         {
-            // DTO To Domain-model
+            //Mapping  DTO To Domain-model
 
             var category = new Category
             {
@@ -139,7 +141,31 @@ namespace Blog.API.Controllers
             return Ok(response);
         }
 
-        
+
+
+        //DELETE:  https://localhost:7223/api/categories/{id}
+        [HttpDelete]
+        [Route("{id:Guid}")]
+
+        public async Task<IActionResult> DeleteCategory ([FromRoute] Guid id)
+        {
+            var category = await categoryRepository.DeleteAsync(id);
+
+            if (category is null)
+            {
+                return NotFound();
+            }
+
+            
+                var response = new CategoryDto
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    UrlHandle = category.UrlHandle
+                };
+                return Ok(response);
+            
+        }
 
     }
 
