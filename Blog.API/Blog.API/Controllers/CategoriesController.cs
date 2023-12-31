@@ -4,6 +4,7 @@ using Blog.API.Models.DTO;
 using Blog.API.Repositories.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace Blog.API.Controllers
  {
@@ -156,7 +157,7 @@ namespace Blog.API.Controllers
                 return NotFound();
             }
 
-            
+            // Mapping Model to DTO 
                 var response = new CategoryDto
                 {
                     Id = category.Id,
