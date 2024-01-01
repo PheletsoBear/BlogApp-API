@@ -131,7 +131,7 @@ namespace Blog.API.Controllers
             {
                 return NotFound();
             }
-            //Convert Domain model to DTO
+            //Mapping Domain model to DTO
             var response = new CategoryDto
             {
                 Id = category.Id,
