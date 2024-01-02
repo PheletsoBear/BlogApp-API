@@ -37,7 +37,7 @@ namespace Blog.API.Repositories.Implemetation
             {
                 return null;
             }
-           
+           //Below is just a basic else block in ASP.Net
                 dbContext.Categories.Remove(existingCategory);
                 await dbContext.SaveChangesAsync();
                 return existingCategory;

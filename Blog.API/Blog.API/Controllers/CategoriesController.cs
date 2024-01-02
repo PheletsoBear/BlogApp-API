@@ -100,6 +100,7 @@ namespace Blog.API.Controllers
                 return NotFound(); //this generates error status 404 not found result
             }
 
+            //Mapping Domain model to the DTO
 
             var response = new CategoryDto
             {
