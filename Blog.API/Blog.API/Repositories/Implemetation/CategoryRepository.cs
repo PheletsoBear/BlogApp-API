@@ -28,6 +28,7 @@ namespace Blog.API.Repositories.Implemetation
 
         }
 
+        //Deletes category by id
         public async Task<Category?> DeleteAsync(Guid id)
         {
             var existingCategory = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
@@ -51,10 +52,13 @@ namespace Blog.API.Repositories.Implemetation
           return  await dbContext.Categories.ToListAsync();
         }
 
+        //Gets a category based on ID
         public async Task<Category?> GetById([FromRoute] Guid id)
         {
             return await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id); // This returns the Id Based on the Lambda expression
         }
+
+
 
         public async Task<Category?> UpdateAsync(Category category)
         {
