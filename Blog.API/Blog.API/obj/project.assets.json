@@ -3347,11 +3347,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL\\Documents\\Blog\\API\\Blog.API\\Blog.API\\Blog.API.csproj",
+      "projectUniqueName": "C:\\Users\\DELL\\Documents\\Sofware_Development\\Blog\\API\\Blog.API\\Blog.API\\Blog.API.csproj",
       "projectName": "Blog.API",
-      "projectPath": "C:\\Users\\DELL\\Documents\\Blog\\API\\Blog.API\\Blog.API\\Blog.API.csproj",
+      "projectPath": "C:\\Users\\DELL\\Documents\\Sofware_Development\\Blog\\API\\Blog.API\\Blog.API\\Blog.API.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL\\Documents\\Blog\\API\\Blog.API\\Blog.API\\obj\\",
+      "outputPath": "C:\\Users\\DELL\\Documents\\Sofware_Development\\Blog\\API\\Blog.API\\Blog.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
