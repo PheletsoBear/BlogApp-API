@@ -28,7 +28,7 @@ namespace Blog.API.Repositories.Implemetation
 
         }
 
-        //Deletes category by id
+        //Deletes category by id in  the edit ui
         public async Task<Category?> DeleteAsync(Guid id)
         {
             var existingCategory = await dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
@@ -70,7 +70,7 @@ namespace Blog.API.Repositories.Implemetation
                 await dbContext.SaveChangesAsync(true);
                 return category;
             }
-            else
+            
             {
                return null;
 

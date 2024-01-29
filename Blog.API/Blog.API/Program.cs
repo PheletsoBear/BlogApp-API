@@ -21,6 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 });
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();  // Injecting Repositories (Interface and implementation)
+builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();  // Injecting Repositories (Interface and implementation)
 
 
 var app = builder.Build();
