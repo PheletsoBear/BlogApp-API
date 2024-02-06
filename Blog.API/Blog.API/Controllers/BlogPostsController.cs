@@ -114,5 +114,39 @@ namespace Blog.API.Controllers
                 return Ok(response);
 
         }
+
+        [HttpGet]
+        [Route("{id:Guid}")]
+
+        public async Task<IActionResult> GetBlogPostById([FromRoute] Guid id)
+        {
+            var existingBlogPost = await blogPostRepository.GetByIdAsync(id);
+            if(existingBlogPost == null)
+            {
+                return NotFound();
+            }
+
+            var response = new BlogPostDTO
+            {
+                Id = existingBlogPost.Id,
+                Title = existingBlogPost.Title,
+                ShortDesc = existingBlogPost.ShortDesc,
+                Content = existingBlogPost.Content,
+                FeaturedImgUrl = existingBlogPost.FeaturedImgUrl,
+                UrlHandle = existingBlogPost.UrlHandle,
+                Author = existingBlogPost.Author,
+                PublishDate = existingBlogPost.PublishDate,
+                IsVisible = existingBlogPost.IsVisible,
+                Categories = existingBlogPost.Categories.Select(
+                 x => new CategoryDto
+                 {
+                     Id = x.Id,
+                     Name = x.Name,
+                     UrlHandle = x.UrlHandle
+                 }).ToList()
+
+            };
+            return Ok(response);
+        }
     }
 }
