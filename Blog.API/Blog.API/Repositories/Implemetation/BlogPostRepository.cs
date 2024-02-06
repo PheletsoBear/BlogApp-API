@@ -1,6 +1,7 @@
 ﻿using Blog.API.Data;
 using Blog.API.Models.Domain;
 using Blog.API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.API.Repositories.Implemetation
 {
@@ -21,6 +22,12 @@ namespace Blog.API.Repositories.Implemetation
             await dbContext.SaveChangesAsync();
 
             return blogPost;
+        }
+
+        public async Task<IEnumerable<BlogPost>> GetAllAsync()
+        {
+
+            return await dbContext.BlogPosts.Include(x => x.Categories).ToListAsync(); //this line gets the blogPost alongside the categories since both entities are related
         }
     }
 }

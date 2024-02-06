@@ -17,6 +17,7 @@ namespace Blog.API.Models.Domain
         public DateTime PublishDate { get; set; }  //Database field  of type string  Property
         public string Author { get; set; }         //Database field  of type string  Property
         public bool IsVisible  { get; set; }       //Database field  of type string  Property
+        public ICollection<Category> Categories { get; set; } //relation property
 
     }
 }
