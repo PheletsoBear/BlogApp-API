@@ -1,5 +1,6 @@
 ﻿using Blog.API.Models.Domain;
 using Blog.API.Models.DTO;
+using Blog.API.Models.DTO.BlogPost;
 using Blog.API.Repositories.Implemetation;
 using Blog.API.Repositories.Interface;
 using Microsoft.AspNetCore.Http;
@@ -14,14 +15,14 @@ namespace Blog.API.Controllers
         private readonly IBlogPostRepository blogPostRepository;
         private readonly ICategoryRepository categoryRepository;
 
-        public BlogPostsController( IBlogPostRepository blogPostRepository,ICategoryRepository categoryRepository )
+        public BlogPostsController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository)
         {
             this.blogPostRepository = blogPostRepository;
             this.categoryRepository = categoryRepository;
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateBlogPost (CreateBlogPostDTO request)
+        public async Task<IActionResult> CreateBlogPost(CreateBlogPostDTO request)
         {
             //Convert DTO to Domain Model
             var blogPost = new BlogPost
@@ -38,7 +39,7 @@ namespace Blog.API.Controllers
 
             };
 
-           foreach (var categoryGuid in request.Categories)
+            foreach (var categoryGuid in request.Categories)
             {
 
                 var existingCategory = await categoryRepository.GetById(categoryGuid);
@@ -47,16 +48,17 @@ namespace Blog.API.Controllers
                     blogPost.Categories.Add(existingCategory);
                 }
             }
-            
+
 
 
 
             //Below code comes from the constructor ontop with that injected the interface
- 
-                await blogPostRepository.CreateAsync(blogPost);
+
+            await blogPostRepository.CreateAsync(blogPost);
 
             var response = new BlogPostDTO
             {
+                Id = blogPost.Id,
                 Title = blogPost.Title,
                 ShortDesc = blogPost.ShortDesc,
                 Content = blogPost.Content,
@@ -89,7 +91,7 @@ namespace Blog.API.Controllers
             var blogPosts = await blogPostRepository.GetAllAsync();
 
             var response = new List<BlogPostDTO>();
-            foreach(var blogPost in blogPosts)
+            foreach (var blogPost in blogPosts)
             {
                 response.Add(new BlogPostDTO
                 {
@@ -111,7 +113,7 @@ namespace Blog.API.Controllers
 
                 });
             }
-                return Ok(response);
+            return Ok(response);
 
         }
 
@@ -121,7 +123,7 @@ namespace Blog.API.Controllers
         public async Task<IActionResult> GetBlogPostById([FromRoute] Guid id)
         {
             var existingBlogPost = await blogPostRepository.GetByIdAsync(id);
-            if(existingBlogPost == null)
+            if (existingBlogPost == null)
             {
                 return NotFound();
             }
@@ -148,5 +150,72 @@ namespace Blog.API.Controllers
             };
             return Ok(response);
         }
+
+        [HttpPut]
+        [Route ("{id:Guid}")]
+        public async Task<IActionResult> UpdateBlogPost([FromRoute] Guid id, UpdateBlogPostDTO request)
+        {
+            //Mapping  DTO To Domain-model
+            var BlogPost = new BlogPost
+            {
+                Id = id,
+                Title = request.Title,
+                ShortDesc = request.ShortDesc,
+                Content = request.Content,
+                FeaturedImgUrl = request.FeaturedImgUrl,
+                UrlHandle = request.UrlHandle,
+                PublishDate = request.PublishDate,
+                Author = request.Author,
+                IsVisible = request.IsVisible,
+                Categories = new List<Category>() //creating a new instance of Category List
+
+            };
+
+
+            foreach (var categoryGuid in request.Categories)
+            {
+
+                var existingCategory = await categoryRepository.GetById(categoryGuid);
+                if (existingCategory is not null)
+                {
+                    BlogPost.Categories.Add(existingCategory);
+                }
+            }
+
+            BlogPost = await blogPostRepository.UpdateAsync(BlogPost);
+
+            if(BlogPost == null)
+            {
+                return NotFound();
+            }
+
+            //Mapping  DTO To Domain-model
+            var response = new BlogPostDTO
+            {
+                Id = id,
+                Title = BlogPost.Title,
+                ShortDesc = BlogPost.ShortDesc,
+                Content = BlogPost.Content,
+                FeaturedImgUrl = BlogPost.FeaturedImgUrl,
+                UrlHandle = BlogPost.UrlHandle,
+                PublishDate = BlogPost.PublishDate,
+                Author = BlogPost.Author,
+                IsVisible = BlogPost.IsVisible,
+
+                Categories = BlogPost.Categories.Select(
+                 x => new CategoryDto
+                 {
+                     Id = x.Id,
+                     Name = x.Name,
+                     UrlHandle = x.UrlHandle
+                 }).ToList()
+
+            };
+
+            return Ok(response);
+
+        }
+
+
     }
 }

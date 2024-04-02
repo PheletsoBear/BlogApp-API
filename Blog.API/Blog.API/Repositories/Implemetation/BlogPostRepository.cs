@@ -34,5 +34,22 @@ namespace Blog.API.Repositories.Implemetation
         {
             return dbContext.BlogPosts.Include(x=>x.Categories).FirstOrDefaultAsync(x => x.Id == id);
         }
+
+        public async Task<BlogPost?> UpdateAsync(BlogPost post)
+        {
+            var existingBlogPost = await dbContext.BlogPosts.Include(x=>x.Categories).FirstOrDefaultAsync(x => x.Id == post.Id);
+
+            if (existingBlogPost != null)
+            {
+                dbContext.Entry(existingBlogPost).CurrentValues.SetValues(post);
+                await dbContext.SaveChangesAsync(true);
+                return post;
+            }
+            else
+            {
+                return null;
+
+            }
+        }
     }
 }

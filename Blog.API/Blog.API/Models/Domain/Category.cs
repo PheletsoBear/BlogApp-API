@@ -10,6 +10,6 @@ namespace Blog.API.Models.Domain
         public Guid Id { get; set; } //Database fiels named ID which is an uniques identifier Property && This property will only be retrived but is disabled for any updates
         public string Name { get; set; } //Database field named Name of type string           Property
         public string UrlHandle { get; set; } //Database field named UrlHandle of type string Property
-        public ICollection<BlogPost> BlogPosts { get; set; } //Realation property 
+        public ICollection<BlogPost> BlogPosts { get; set; } //Relation property 
     }
 }

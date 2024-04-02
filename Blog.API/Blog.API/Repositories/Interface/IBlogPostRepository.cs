@@ -1,4 +1,7 @@
 ﻿using Blog.API.Models.Domain;
+using Microsoft.AspNetCore.Mvc;
+
+
 
 namespace Blog.API.Repositories.Interface
 {
@@ -9,6 +12,7 @@ namespace Blog.API.Repositories.Interface
 
         Task<BlogPost?> GetByIdAsync(Guid id);
 
+        Task<BlogPost?> UpdateAsync(BlogPost post);
 
 
 

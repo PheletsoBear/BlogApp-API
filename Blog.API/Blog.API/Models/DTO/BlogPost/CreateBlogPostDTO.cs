@@ -2,6 +2,7 @@
 {
     public class CreateBlogPostDTO
     {
+
         public string Title { get; set; }
         public string ShortDesc { get; set; }
         public string Content { get; set; }
