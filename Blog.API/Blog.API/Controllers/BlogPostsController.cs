@@ -5,6 +5,7 @@ using Blog.API.Repositories.Implemetation;
 using Blog.API.Repositories.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.API.Controllers
 {
@@ -216,6 +217,36 @@ namespace Blog.API.Controllers
 
         }
 
+        [HttpDelete]
+        [Route("{id:Guid}")]
+
+        public async Task<IActionResult> DeleteBlogPost([FromRoute] Guid id)
+        {
+            var blogPost = await blogPostRepository.DeleteAsync(id);
+
+            if (blogPost is null)
+            {
+                return NotFound();
+            }
+
+            // Mapping Model to DTO 
+            var response = new BlogPostDTO
+            {
+                Id = id,
+                Title = blogPost.Title,
+                ShortDesc = blogPost.ShortDesc,
+                Content = blogPost.Content,
+                FeaturedImgUrl = blogPost.FeaturedImgUrl,
+                UrlHandle = blogPost.UrlHandle,
+                PublishDate = blogPost.PublishDate,
+                Author = blogPost.Author,
+                IsVisible = blogPost.IsVisible
+              
+
+            };
+            return Ok(response);
+
+        }
 
     }
 }

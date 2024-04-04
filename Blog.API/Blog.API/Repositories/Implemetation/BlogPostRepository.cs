@@ -24,6 +24,25 @@ namespace Blog.API.Repositories.Implemetation
             return blogPost;
         }
 
+        public async Task<BlogPost?> DeleteAsync(Guid id)
+        {
+
+            var existingBlogPost = await dbContext.BlogPosts.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingBlogPost is null)
+            {
+                return null;
+            }
+            else
+            {
+
+            dbContext.BlogPosts.Remove(existingBlogPost);
+            await dbContext.SaveChangesAsync();
+            return existingBlogPost;
+
+            }
+        }
+
         public async Task<IEnumerable<BlogPost>> GetAllAsync()
         {
 

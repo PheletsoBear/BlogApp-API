@@ -14,6 +14,8 @@ namespace Blog.API.Repositories.Interface
 
         Task<BlogPost?> UpdateAsync(BlogPost post);
 
+        Task<BlogPost?> DeleteAsync(Guid id);
+
 
 
     }
