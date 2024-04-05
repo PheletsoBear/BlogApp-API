@@ -20,5 +20,6 @@ namespace Blog.API.Data
 
         public DbSet<BlogPost> BlogPosts { get; set; } //Entity BlogPosts will be created in the MSSQL and this comes from domain models
         public DbSet<Category> Categories { get; set; }//Entity Categories will be created in the MSSQL and this comes from domain models 
+        public DbSet<BlogImage> BlogImages { get; set; } //Entity BlogImages will be created in the MSSQL and this comes from domain models
     }
 }
