@@ -17,8 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Images\" />
     <Folder Include="Models\DTO\NewFolder1\" />
     <Folder Include="Models\DTO\NewFolder\" />
+    <Folder Include="NewFolder1\" />
+    <Folder Include="NewFolder2\" />
+    <Folder Include="NewFolder\" />
   </ItemGroup>
 
 </Project>
