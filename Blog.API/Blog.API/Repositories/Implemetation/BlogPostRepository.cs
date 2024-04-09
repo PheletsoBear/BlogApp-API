@@ -49,9 +49,14 @@ namespace Blog.API.Repositories.Implemetation
             return await dbContext.BlogPosts.Include(x => x.Categories).ToListAsync(); //this line gets the blogPost alongside the categories since both entities are related
         }
 
-        public Task<BlogPost?> GetByIdAsync(Guid id)
+        public  Task<BlogPost?> GetByIdAsync(Guid id)
         {
             return dbContext.BlogPosts.Include(x=>x.Categories).FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public  Task<BlogPost?> GetByUrlAsync(string url)
+        {
+            return dbContext.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(x => x.UrlHandle == url);
         }
 
         public async Task<BlogPost?> UpdateAsync(BlogPost post)
