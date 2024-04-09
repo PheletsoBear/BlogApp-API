@@ -1,7 +1,7 @@
 ﻿using Blog.API.Data;
 using Blog.API.Models.Domain;
-using Blog.API.Models.DTO.BlogPost;
 using Blog.API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.API.Repositories.Implemetation
 {
@@ -18,6 +18,14 @@ namespace Blog.API.Repositories.Implemetation
             this.httpContextAccessor = httpContextAccessor;
             this.dbContext = dbContext;
         }
+
+   
+
+        public async Task<IEnumerable<BlogImage>> GetAllAsync()
+        {
+            return await dbContext.BlogImages.ToListAsync();
+        }
+
         public async Task<BlogImage> Upload(IFormFile file, BlogImage blogImage)
         {
             //1-Upload the Image to API/Images local path
@@ -39,11 +47,6 @@ namespace Blog.API.Repositories.Implemetation
             return blogImage;
 
 
-        }
-
-        public Task<BlogImageDTO> Upload(IFormFile file, BlogImageDTO blogImage)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Blog.API.Models.DTO;
+﻿using Blog.API.Models.Domain;
+using Blog.API.Models.DTO;
 using Blog.API.Models.DTO.BlogPost;
+using Blog.API.Repositories.Implemetation;
 using Blog.API.Repositories.Interface;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +19,34 @@ namespace Blog.API.Controllers
             this.imagesRespository = imagesRespository;
         }
 
+    [HttpGet]
+    public async Task<IActionResult> GetAllImages()
+        {
+            //call repository to get all images
+            var images = await imagesRespository.GetAllAsync();
+
+            //Convert domain-model to DTO
+
+            var response = new List<BlogImageDTO>();
+           foreach (var image in images)
+            {
+                response.Add(new BlogImageDTO
+                {
+                    Id = image.Id,
+                    Title = image.Title,
+                    DateCreated = image.DateCreated,
+                    FileExtension = image.FileExtension,
+                    FileName = image.FileName,
+                    Url = image.Url,
+                });
+            }
+                return Ok(response);
+
+
+        }
+
+
+
         //Post: {apiBaseUrl}/api/images
         [HttpPost]
         public async Task<IActionResult> UploadImage([FromForm] IFormFile file,
@@ -27,7 +57,7 @@ namespace Blog.API.Controllers
             if (ModelState.IsValid)
             {
                 //file upload to Domain-model
-                var blogImage = new BlogImageDTO
+                var blogImage = new BlogImage
                 {
                     FileExtension = Path.GetExtension(file.FileName).ToLower(),
                     FileName = fileName,
@@ -36,7 +66,7 @@ namespace Blog.API.Controllers
 
                 };
 
-             blogImage =   await imagesRespository.Upload(file, blogImage);
+                blogImage = await imagesRespository.Upload(file, blogImage);
 
                 //convert Domain-model to DTO
 
@@ -59,7 +89,7 @@ namespace Blog.API.Controllers
 
         private void ValidateFileUpload(IFormFile file)
         {
-            var allowedExtension = new string[] { ".png", ".jpeg", ".png",".jpg" };
+            var allowedExtension = new string[] { ".png", ".jpeg", ".png",".jpg", ".jfif" };
 
             if (!allowedExtension.Contains(Path.GetExtension(file.FileName).ToLower()))
             {
@@ -73,4 +103,6 @@ namespace Blog.API.Controllers
 
         }
     }
+
+
 }
