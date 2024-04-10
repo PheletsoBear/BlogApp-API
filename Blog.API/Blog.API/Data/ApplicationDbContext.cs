@@ -13,7 +13,7 @@ namespace Blog.API.Data
 {
     public class ApplicationDbContext : DbContext  //This inherits subclass of DbContext and create custom databae from Entity Framework
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options) //Passes the configuration options that defines the how the database context should be configured
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) //Passes the configuration options that defines the how the database context should be configured
         {
         }
 

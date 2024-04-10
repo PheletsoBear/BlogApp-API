@@ -2,6 +2,7 @@
 using Blog.API.Models.Domain;
 using Blog.API.Models.DTO;
 using Blog.API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -64,7 +65,7 @@ namespace Blog.API.Controllers
 
         // Get:https://localhost:7223/api/Categories
         [HttpGet]
-
+        [Authorize]
         public async Task<IActionResult> GetAllCategories()
         {
             var categories = await categoryRepository.GetAllAsync();

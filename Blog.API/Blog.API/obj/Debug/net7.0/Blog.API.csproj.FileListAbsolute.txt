@@ -150,3 +150,16 @@ C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\obj\Debug
 C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\obj\Debug\net7.0\Blog.API.pdb
 C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\obj\Debug\net7.0\Blog.API.genruntimeconfig.cache
 C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\obj\Debug\net7.0\ref\Blog.API.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\EntityFramework.SqlServer.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\EntityFramework.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\Microsoft.AspNet.Identity.Core.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\Microsoft.Owin.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\Microsoft.Owin.Security.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\Microsoft.Owin.Security.Cookies.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\Microsoft.Owin.Security.OAuth.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\DELL\Documents\Sofware_Development\Blog\API\Blog.API\Blog.API\bin\Debug\net7.0\Owin.dll
