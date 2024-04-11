@@ -1,14 +1,11 @@
 using Blog.API.Data;
 using Blog.API.Repositories.Implemetation;
 using Blog.API.Repositories.Interface;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,22 +35,23 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();  // Injecting Repositories (Interface and implementation)
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();  // Injecting Repositories (Interface and implementation)
 builder.Services.AddScoped<IImagesRespository, imagesRespository>(); // Injecting Repositories (Interface and implementation)
+builder.Services.AddScoped<ITokenRespository, TokenRepository>();
 
-
-builder.Services.AddIdentityCore < Microsoft.AspNetCore.Identity.IdentityUser>()
-    .AddRoles<Microsoft.AspNetCore.Identity.IdentityRole>().
-    AddTokenProvider<Microsoft.AspNetCore.Identity.DataProtectorTokenProvider<Microsoft.AspNetCore.Identity.IdentityUser>>("BlogApp").
-    AddEntityFrameworkStores<AuthDbContext>()
+builder.Services.AddIdentityCore<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("BlogApp")
+    .AddEntityFrameworkStores<AuthDbContext>()
     .AddDefaultTokenProviders();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    options.Password.RequireDigit = false;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireUppercase = false;
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
     options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequiredLength = 6;
+    options.Password.RequiredLength = 8;
     options.Password.RequiredUniqueChars = 1;
+   
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
